@@ -8,14 +8,7 @@ public class MeetingRoomsIII {
     public int mostBooked(int n, int[][] meetings) {
         int room[]=new int[n];
         PriorityQueue<Integer>roomAvailable = new PriorityQueue<>();
-        PriorityQueue<int[]>pair = new PriorityQueue<>(new Comparator<>(){
-            public int compare(int[] a, int[] b)
-            {
-                if(a[0]==b[0])
-                 return a[1]-b[1];
-                return a[0]-b[0]; 
-            }
-        });
+        PriorityQueue<int[]> pair = new PriorityQueue<>(new PairComparator());
        Arrays.sort(meetings,(a,b)->a[0]-b[0]);
        for(int i=0;i<n;i++)
        {
@@ -54,5 +47,14 @@ public class MeetingRoomsIII {
            }
        } 
        return ans;
+    }
+}
+class PairComparator implements Comparator<int[]> {
+    @Override
+    public int compare(int[] a, int[] b) {
+        if (a[0] == b[0]) {
+            return a[1] - b[1];
+        }
+        return a[0] - b[0];
     }
 }
